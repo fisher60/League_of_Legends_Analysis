@@ -1,5 +1,7 @@
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
 from league_analysis.parsing.get_data import get_column
 
 
@@ -7,13 +9,33 @@ def vision_to_deaths(team="blue"):
     vision_data = get_column(f"{team}WardsPlaced")
     deaths_data = get_column(f"{team}Deaths")
 
-    X = np.array([[wards, deaths] for wards, deaths in zip(vision_data, deaths_data)])
-    y = np.dot(X, np.array([1, 2])) + 3
+    staged_data = [[wards, deaths] for wards, deaths in zip(vision_data, deaths_data)]
+
+    if len(staged_data) % 2:
+        staged_data.pop()
+
+    x_train = [[x[0]] for x in staged_data[:len(staged_data) // 2]]
+    y_train = [[x[1]] for x in staged_data[:len(staged_data) // 2]]
+
+    x_test = [[x[0]] for x in staged_data[len(staged_data) // 2:]]
+    y_test = [[x[1]] for x in staged_data[len(staged_data) // 2:]]
+
+    X = np.array(x_train)
+    y = np.array(y_train)
 
     reg = LinearRegression().fit(X, y)
-    print(f"Score is: {reg.score(X, y)}")
+    y_pred = reg.predict(np.array(x_test))
 
-    print(reg.predict(np.array([[25, 6]])))
+    print('Mean squared error: %.2f' % mean_squared_error(y_test, y_pred))
+    # The coefficient of determination: 1 is perfect prediction
+    print('Coefficient of determination: %.2f' % r2_score(y_test, y_pred))
 
-
-vision_to_deaths()
+    # Plot outputs
+    fig = plt.figure()
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.scatter(x_test, y_test, color='b')
+    ax.scatter(x_test, y_pred, color='r')
+    ax.set_xlabel('Vision')
+    ax.set_ylabel('Deaths')
+    ax.set_title('Vision/Deaths')
+    plt.show()
