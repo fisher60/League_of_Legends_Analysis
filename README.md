@@ -4,6 +4,12 @@ Machine learning algorithms to predict game outcomes based on the League of Lege
 # Installation
 1. clone this rep
 
-2. create a virtualenv and activate
+2. create a virtualenv named "venv" (for gitignore) and activate
 
 3. `pip install -r requirements.txt`
+
+### To Run
+1. Activate virtual env
+
+2. run `python -m league_analysis [command]` from root dir. *"command" is the name of the action to perform, in order to
+run the regression function use the command `python -m league_analysis regression`*

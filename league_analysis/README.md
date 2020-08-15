@@ -7,3 +7,4 @@ methods and provide an example of how these methods can be used.
 
 3. Combine analysis methods to condense data to meaningful values that can be run through further, 
 more involved analysis in an effort to both improve accuracy and also speed up calculations as much as reasonable.
+
