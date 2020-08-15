@@ -2,12 +2,14 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
-from league_analysis.parsing.get_data import get_column
+from league_analysis.parsing.get_data import get_columns
 
 
 def vision_to_deaths(team="blue"):
-    vision_data = get_column(f"{team}WardsPlaced")
-    deaths_data = get_column(f"{team}Deaths")
+    data = get_columns([f"{team}WardsPlaced", f"{team}Deaths"])
+    print(data)
+    vision_data = data[0]
+    deaths_data = data[1]
 
     staged_data = [[wards, deaths] for wards, deaths in zip(vision_data, deaths_data)]
 
