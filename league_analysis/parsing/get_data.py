@@ -1,7 +1,8 @@
+"""Importing data from csv."""
+
 from pandas import read_csv
 from league_analysis.settings import DATA_DIR
 from pathlib import Path
-
 
 
 def get_columns(names: list) -> list:

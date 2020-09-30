@@ -1,3 +1,5 @@
+"""Main entry point, accepts arguments for which commands to run."""
+
 from sys import argv
 from league_analysis.analysis.regression import vision_to_deaths
 from league_analysis.analysis.neigh import dragons_to_kills

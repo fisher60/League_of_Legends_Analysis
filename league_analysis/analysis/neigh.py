@@ -1,3 +1,5 @@
+"""Analysis that uses KNN."""
+
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
@@ -6,7 +8,10 @@ from league_analysis.parsing.get_data import get_columns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 
+
 def dragons_to_kills(team="blue"):
+    """Analyze the relationship between dragons kills/obtained and team kills"""
+
     data = get_columns([f"{team}Dragons", f"{team}Kills", f"{team}Wins"])
 
     drags_killed = data[0]

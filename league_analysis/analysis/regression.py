@@ -1,3 +1,5 @@
+"""Analysis that uses linear regression."""
+
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
@@ -6,6 +8,8 @@ from league_analysis.parsing.get_data import get_columns
 
 
 def vision_to_deaths(team="blue"):
+    """Plot the relation of vision score to the number of deaths."""
+
     data = get_columns([f"{team}WardsPlaced", f"{team}Deaths"])
     print(data)
     vision_data = data[0]
